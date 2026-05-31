@@ -41,7 +41,78 @@
 ### Step 14: 
   Stop
 # Program:
+```
+#include <stdio.h>
+
+/* Function declaration */
+void validateDate();
+
+int main()
+{
+    /* Function call */
+    validateDate();
+
+    return 0;
+}
+
+/* Function definition */
+void validateDate()
+{
+    int dd, mm, yy;
+    int leap = 0;
+
+    /* Read date from user */
+    printf("Enter date (DD/MM/YYYY): ");
+    scanf("%d/%d/%d", &dd, &mm, &yy);
+
+    /* Validate year */
+    if(yy < 1900 || yy > 9999)
+    {
+        printf("Year is not valid\n");
+        return;
+    }
+
+    /* Validate month */
+    if(mm < 1 || mm > 12)
+    {
+        printf("Month is not valid\n");
+        return;
+    }
+
+    /* Check leap year */
+    if((yy % 400 == 0) || (yy % 4 == 0 && yy % 100 != 0))
+    {
+        leap = 1;
+    }
+
+    /* Validate days */
+    if(mm == 1 || mm == 3 || mm == 5 || mm == 7 ||
+       mm == 8 || mm == 10 || mm == 12)
+    {
+        if(dd >= 1 && dd <= 31)
+            printf("Date is valid.\n");
+        else
+            printf("Date is invalid.\n");
+    }
+    else if(mm == 4 || mm == 6 || mm == 9 || mm == 11)
+    {
+        if(dd >= 1 && dd <= 30)
+            printf("Date is valid.\n");
+        else
+            printf("Date is invalid.\n");
+    }
+    else if(mm == 2)
+    {
+        if((dd >= 1 && dd <= 28) || (dd == 29 && leap))
+            printf("Date is valid.\n");
+        else
+            printf("Date is invalid.\n");
+    }
+}
+```
 # Output:
+<img width="440" height="234" alt="image" src="https://github.com/user-attachments/assets/13dccc41-bf03-4996-aa8f-3021be3fcd1c" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -89,7 +160,56 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 13: 
   Stop
 # Program:
+```
+#include <stdio.h>
+
+/* Function declarations */
+int max(int num1, int num2);
+int min(int num1, int num2);
+
+int main()
+{
+    int num1, num2;
+    int maximum, minimum;
+
+    /* Read two numbers */
+    printf("Enter two numbers: ");
+    scanf("%d %d", &num1, &num2);
+
+    /* Find maximum */
+    maximum = max(num1, num2);
+
+    /* Find minimum */
+    minimum = min(num1, num2);
+
+    /* Display results */
+    printf("Maximum = %d\n", maximum);
+    printf("Minimum = %d\n", minimum);
+
+    return 0;
+}
+
+/* Function to find maximum */
+int max(int num1, int num2)
+{
+    if(num1 > num2)
+        return num1;
+    else
+        return num2;
+}
+
+/* Function to find minimum */
+int min(int num1, int num2)
+{
+    if(num1 > num2)
+        return num2;
+    else
+        return num1;
+}
+```
 # Output:
+<img width="474" height="308" alt="image" src="https://github.com/user-attachments/assets/cd3e54d4-6f6e-4943-89d4-e04932c8824f" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -137,7 +257,57 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 11: 
  Stop
 # Program:
+```
+#include <stdio.h>
+
+/* Function prototypes */
+float celtof();
+float ftocel();
+
+int main()
+{
+    float fahrenheit, celsius;
+
+    /* Celsius to Fahrenheit conversion */
+    fahrenheit = celtof();
+    printf("Temperature in Fahrenheit = %.2f\n", fahrenheit);
+
+    /* Fahrenheit to Celsius conversion */
+    celsius = ftocel();
+    printf("Temperature in Celsius = %.2f\n", celsius);
+
+    return 0;
+}
+
+/* Function to convert Celsius to Fahrenheit */
+float celtof()
+{
+    float C, F;
+
+    printf("Enter the temperature in Celsius: ");
+    scanf("%f", &C);
+
+    F = (C * 9 / 5) + 32;
+
+    return F;
+}
+
+/* Function to convert Fahrenheit to Celsius */
+float ftocel()
+{
+    float f, celsius;
+
+    printf("Enter the temperature in Fahrenheit: ");
+    scanf("%f", &f);
+
+    celsius = (f - 32) * 5 / 9;
+
+    return celsius;
+}
+```
 # Output:
+<img width="553" height="311" alt="image" src="https://github.com/user-attachments/assets/be1e75b1-866b-4ecd-9794-ef5539ccd4d0" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -185,7 +355,79 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 7: 
   Stop
 # Program:
+```
+#include <stdio.h>
+
+#define R 4
+#define C 4
+
+/* Function declaration */
+void spiralPrint(int m, int n, int a[R][C]);
+
+int main()
+{
+    /* Initialize 4x4 matrix */
+    int a[R][C] = {
+        {1, 2, 3, 4},
+        {5, 6, 7, 8},
+        {9, 10, 11, 12},
+        {13, 14, 15, 16}
+    };
+
+    printf("Spiral form of the matrix:\n");
+
+    /* Function call */
+    spiralPrint(R, C, a);
+
+    return 0;
+}
+
+/* Function definition */
+void spiralPrint(int m, int n, int a[R][C])
+{
+    int i, k = 0, l = 0;
+
+    while(k < m && l < n)
+    {
+        /* Print top row */
+        for(i = l; i < n; ++i)
+        {
+            printf("%d ", a[k][i]);
+        }
+        k++;
+
+        /* Print last column */
+        for(i = k; i < m; ++i)
+        {
+            printf("%d ", a[i][n - 1]);
+        }
+        n--;
+
+        /* Print bottom row */
+        if(k < m)
+        {
+            for(i = n - 1; i >= l; --i)
+            {
+                printf("%d ", a[m - 1][i]);
+            }
+            m--;
+        }
+
+        /* Print first column */
+        if(l < n)
+        {
+            for(i = m - 1; i >= k; --i)
+            {
+                printf("%d ", a[i][l]);
+            }
+            l++;
+        }
+    }
+}
+```
 # Output:
+<img width="568" height="302" alt="image" src="https://github.com/user-attachments/assets/a58dc658-72ad-408f-ae2d-92a8895d9a24" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
@@ -220,7 +462,59 @@ To build a C program to convert a string as described above, using a user-define
 ### Step 6: 
  Stop
 # Program:
+```
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+/* Function declaration */
+void convertFirstCLastC(char str[]);
+
+int main()
+{
+    char str[100];
+
+    /* Read input string */
+    printf("Enter a string: ");
+    scanf("%[^\n]", str);
+
+    /* Function call */
+    convertFirstCLastC(str);
+
+    /* Display modified string */
+    printf("Modified string: %s\n", str);
+
+    return 0;
+}
+
+/* Function definition */
+void convertFirstCLastC(char str[])
+{
+    int i, len;
+
+    /* Find length of string */
+    len = strlen(str);
+
+    /* Convert first character to uppercase */
+    str[0] = toupper(str[0]);
+
+    /* Convert characters before and after spaces */
+    for(i = 1; i < len - 1; i++)
+    {
+        if(str[i] == ' ')
+        {
+            str[i - 1] = toupper(str[i - 1]);
+            str[i + 1] = toupper(str[i + 1]);
+        }
+    }
+
+    /* Convert last character to uppercase */
+    str[len - 1] = toupper(str[len - 1]);
+}
+```
 # Output:
+<img width="496" height="260" alt="image" src="https://github.com/user-attachments/assets/010066a0-6de2-4fbf-8c3e-bf0a70fb6a37" />
+
 # Result: 
 Thus, the program was implemented and executed successfully, and the required output was obtained.
 
